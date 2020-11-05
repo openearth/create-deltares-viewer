@@ -3,7 +3,7 @@ module.exports = {
     locale: "en",
   },
   map: {
-    center: [52.1326, 5.2913],
-    zoom: 7
+    center: [5.2913, 52.1326],
+    zoom: 7,
   },
 };

@@ -57,6 +57,14 @@ function generateConfig(destination, options) {
   fs.writeFileSync(path.join(destination, "config", "config.yml"), yamlOutput);
 }
 
+function generateReadme(destination, options) {
+  const filePath = path.join(destination, "readme.md");
+  const template = fs.readFileSync(filePath).toString();
+  const packageJson = mustache.render(template, options);
+
+  fs.writeFileSync(filePath, packageJson);
+}
+
 function generatePackageJson(destination, options) {
   const filePath = path.join(destination, "package.json");
   const template = fs.readFileSync(filePath).toString();
@@ -114,8 +122,11 @@ module.exports = async function createApp() {
     log(chalk.green("✔ succefully copied files"));
 
     generatePackageJson(destination, options);
-
     log(chalk.green("✔ succefully generated package.json"));
+
+    generateReadme(destination, options);
+    log(chalk.green("✔ succefully generated readme.md"));
+
     log(chalk.green("✔ project setup successful"));
     log();
 
