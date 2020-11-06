@@ -8,7 +8,9 @@
     "questions.js",
     "util.js",
     "package-lock.json",
-    "template/**/*"
+    "template",
+    "template/.gitignore",
+    "template/.env"
   ],
   "main": "index.js",
   "bin": {
