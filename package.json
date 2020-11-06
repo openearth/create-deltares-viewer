@@ -8,7 +8,7 @@
     "questions.js",
     "util.js",
     "package-lock.json",
-    "template"
+    "template/**/*"
   ],
   "main": "index.js",
   "bin": {
