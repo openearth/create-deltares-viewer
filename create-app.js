@@ -63,6 +63,10 @@ module.exports = async function createApp() {
   } catch (err) {
     await rimraf(destination);
 
-    logger([["red", `☠ there was an error: ${err.message}`]]);
+    if (err.message) {
+      logger([["red", `☠ there was an error: ${err.message}`]]);
+    } else {
+      console.error(err)
+    }
   }
 };
