@@ -11,10 +11,19 @@ const spawn = require("cross-spawn");
 const { kebabCaseIt } = require("case-it");
 
 const questions = require("./questions");
-const defaultConfig = require("./default-config");
 
 const root = __dirname;
 const log = console.log;
+
+const defaultConfig = {
+  i18n: {
+    locale: "en",
+  },
+  map: {
+    center: [5.2913, 52.1326],
+    zoom: 7,
+  },
+};
 
 async function getOptions() {
   const answers = await inquirer.prompt(questions);
