@@ -9,6 +9,7 @@ const yaml = require("json-to-pretty-yaml");
 const { unflatten } = require("flat");
 const spawn = require("cross-spawn");
 const { kebabCaseIt } = require("case-it");
+const rename = promisify(fs.rename)
 
 const questions = require("./questions");
 
@@ -105,6 +106,14 @@ function installDependencies(destination) {
   });
 }
 
+async function initializeDotfiles(destination) {
+  const files = ['env', 'gitignore']
+
+  await Promise.all(files.map(async file => {
+    await rename(path.join(destination, file), path.join(destination, `.${file}`))
+  }))
+}
+
 function logger(config) {
   config.forEach((line) => {
     if (line.length) {
@@ -124,5 +133,6 @@ module.exports = {
   generateReadme,
   generatePackageJson,
   installDependencies,
+  initializeDotfiles,
   logger
 }

@@ -10,7 +10,8 @@ const {
   generateReadme,
   generatePackageJson,
   installDependencies,
-  logger
+  initializeDotfiles,
+  logger,
 } = require("./util");
 
 module.exports = async function createApp() {
@@ -29,6 +30,8 @@ module.exports = async function createApp() {
     logger(["", ["blueBright", "‣ setting up project from template"], ""]);
 
     await copyTemplate(destination, options.name);
+
+    initializeDotfiles(destination)
 
     generateConfig(destination, options);
 
