@@ -58,7 +58,7 @@ module.exports = async function createApp() {
       [],
       ["white", `All done! created ${options.name} in ${destination}`],
       ["white", "Start developing by typing:"],
-      ["blueBright", `  cd ${destination}`],
+      ["blueBright", `  cd ${path.join(destination, "app")}`],
       [],
       ["white", "Start developing by typing:"],
       ["blueBright", "  npm run start"],

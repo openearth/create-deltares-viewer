@@ -67,7 +67,7 @@ function generateConfig(destination, options) {
 }
 
 function generateReadme(destination, options) {
-  const filePath = path.join(destination, "readme.md");
+  const filePath = path.join(destination, "app", "readme.md");
   const template = fs.readFileSync(filePath).toString();
   const packageJson = mustache.render(template, options);
 
@@ -75,7 +75,7 @@ function generateReadme(destination, options) {
 }
 
 function generatePackageJson(destination, options) {
-  const filePath = path.join(destination, "package.json");
+  const filePath = path.join(destination, "app", "package.json");
   const template = fs.readFileSync(filePath).toString();
   const packageJson = mustache.render(template, options);
 
@@ -86,7 +86,7 @@ function installDependencies(destination) {
   return new Promise((resolve, reject) => {
     const process = spawn("npm", ["install"], {
       stdio: "inherit",
-      cwd: destination,
+      cwd: path.join(destination, "app"),
     });
     const errorMessage = "installation failed";
 
@@ -110,7 +110,7 @@ async function initializeDotfiles(destination) {
   const files = ['env', 'gitignore']
 
   await Promise.all(files.map(async file => {
-    await rename(path.join(destination, file), path.join(destination, `.${file}`))
+    await rename(path.join(destination, "app", file), path.join(destination, "app", `.${file}`))
   }))
 }
 
