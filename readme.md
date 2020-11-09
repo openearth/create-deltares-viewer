@@ -10,8 +10,24 @@ Create a deltares viewer with one command. These packages are included:
 
 Run the following command to initialize your application:
 
+### Create project
+
 ```sh
 npx github:openearth/create-deltares-viewer
-cd [project-name]
+```
+
+### Update configuration
+
+Files to configure the application are located in the `/config` directory.
+
+- `config.yaml`: the basic configuration of the application
+- `/content`: text content and translation
+- `/data`: files containing the data for the map layers
+
+### Start application
+
+Start the application from the `/app` directory with: 
+
+```sh
 npm run start
 ```
