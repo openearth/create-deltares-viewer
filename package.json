@@ -28,6 +28,7 @@
     "json-to-pretty-yaml": "^1.2.2",
     "mustache": "^4.0.1",
     "ncp": "^2.0.0",
+    "ora": "^5.1.0",
     "rimraf": "^3.0.2"
   }
 }
