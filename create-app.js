@@ -31,7 +31,7 @@ module.exports = async function createApp() {
 
     await copyTemplate(destination, options.name);
 
-    initializeDotfiles(destination)
+    initializeDotfiles(destination);
 
     generateConfig(destination, options);
 
@@ -47,7 +47,7 @@ module.exports = async function createApp() {
       ["green", "✔ succefully generated readme.md"],
       ["green", "✔ project setup successful"],
       [],
-      ["blue", "‣ going to install dependencies"],
+      ["blueBright", "‣ going to install dependencies"],
       [],
     ]);
 
@@ -56,11 +56,18 @@ module.exports = async function createApp() {
     logger([
       ["green", "✔ depencies installed successfully"],
       [],
-      ["white", `All done! created ${options.name} in ${destination}`],
-      ["white", "Start developing by typing:"],
-      ["blueBright", `  cd ${path.join(destination, "app")}`],
+      [["white", `All done! created ${options.name} in `], ["yellow", destination]],
       [],
-      ["white", "Start developing by typing:"],
+      ["white", "The configuration can be found here:"],
+      [["white", `  ${destination}`], ["yellow", "/config"]],
+      [],
+      ["white", "The app can be found here:"],
+      [["white", `  ${destination}`], ["yellow", "/app"]],
+      [],
+      ["white", "Start developing by navigating into the app:"],
+      [["blueBright", `  cd ./${options.name}/app`]],
+      [],
+      ["white", "Then, start developing by typing:"],
       ["blueBright", "  npm run start"],
     ]);
   } catch (err) {
@@ -69,7 +76,7 @@ module.exports = async function createApp() {
     if (err.message) {
       logger([["red", `☠ there was an error: ${err.message}`]]);
     } else {
-      console.error(err)
+      console.error(err);
     }
   }
 };
