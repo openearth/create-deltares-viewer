@@ -1,6 +1,6 @@
 # Create Deltares viewer
 
-Create a deltares viewer with one command. These packages are included:
+Create a Deltares viewer with one command. These packages are included:
 
 - [Vuetify](https://vuetifyjs.com)
 - [Vue router](https://router.vuejs.org/)
