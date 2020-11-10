@@ -116,11 +116,15 @@ async function initializeDotfiles(destination) {
 
 function logger(config) {
   config.forEach((line) => {
-    if (line.length) {
+    if (!line.length) {
+      return log()
+    }
+
+    if (typeof line[0] === 'string') {
       const [color, message] = line;
-      return log(chalk[color](message));
+      log(chalk[color](message));
     } else {
-      log();
+      log(line.map(([color, message]) => chalk[color](message)).join(''));
     }
   });
 }
