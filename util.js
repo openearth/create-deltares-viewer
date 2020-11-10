@@ -10,6 +10,7 @@ const { unflatten } = require("flat");
 const spawn = require("cross-spawn");
 const { kebabCaseIt } = require("case-it");
 const rename = promisify(fs.rename)
+const ora = require("ora")
 
 const questions = require("./questions");
 
@@ -84,10 +85,15 @@ function generatePackageJson(destination, options) {
 
 function installDependencies(destination) {
   return new Promise((resolve, reject) => {
+    const spinner = ora("installing dependencies (this could take a while)").start();
+    spinner.color = 'blue'
+
     const process = spawn("npm", ["install"], {
-      stdio: "inherit",
+      // stdio: "inherit",
+      silent: true,
       cwd: path.join(destination, "app"),
     });
+
     const errorMessage = "installation failed";
 
     process.on("error", function (err) {
@@ -95,6 +101,8 @@ function installDependencies(destination) {
     });
 
     process.on("close", (code) => {
+      spinner.stop();
+
       if (code !== 0) {
         reject(new Error(errorMessage));
 
