@@ -9,7 +9,10 @@
     "start": "npm run serve"
   },
   "dependencies": {
-    "@voorhoede/deltares-vuetify-theme": "^1.0.4",
+    "@deltares/design-tokens": "^0.2.0-alpha.0",
+    "@deltares/vue-components": "^0.2.0-alpha.0",
+    "@deltares/vuetify-theme": "^0.2.0",
+    "@vue/composition-api": "^1.0.0-beta.19",
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
     "html-loader": "^1.3.2",

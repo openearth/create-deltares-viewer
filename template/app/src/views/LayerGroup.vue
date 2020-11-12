@@ -1,32 +1,52 @@
 <template>
   <div>
-    <layer-list
+    <layer-list-controls
       :key="this.$route.params.id"
       :layers="layers"
-      @change="$emit('layersUpdate', $event)"
-      @legendChange="$emit('legendUpdate', $event)"
+      @layer-sorting-change="onLayerSortingChange"
+      @active-layers-change="onActiveLayerChange"
+      @legend-change="onLegendChange"
     />
   </div>
 </template>
 
 <script>
-import LayerList from '@/components/layer-list';
+import { LayerListControls } from '@deltares/vue-components';
 import { importConfig } from '@/lib/config-utils'
 
 export default {
   components: {
-    LayerList,
+    LayerListControls,
   },
   data() {
     return {
-      activeLegend: null
+      activeLegend: null,
+      layers: [],
+      activeLayers: []
     }
   },
-  computed: {
-    layers() {
-      const { id } = this.$route.params;
-      return importConfig(`data/${id}`);
-    },
+  watch: {
+    $route: {
+      immediate: true,
+      async handler(newRoute) {
+        const { id } = newRoute.params;
+        this.layers = []
+        await this.$nextTick()
+        this.layers = importConfig(`data/${id}`);
+      }
+    }
   },
+  methods: {
+    onLayerSortingChange(newLayers) {
+      this.layers = newLayers
+    },
+    onLegendChange(event) {
+      this.$emit('legend-update', event)
+    },
+    onActiveLayerChange(activeLayers) {
+      this.activeLayers = activeLayers
+      this.$emit('active-layers-update', activeLayers)
+    }
+  }
 };
 </script>

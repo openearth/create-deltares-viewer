@@ -17,11 +17,12 @@ const locales = fs.readdirSync(
 module.exports = {
   transpileDependencies: [
     "vuetify",
-    "@voorhoede/deltares-vuetify-theme",
-    "vue2mapbox-gl",
+    "@deltares/vuetify-theme",
+    "@deltares/vue-components",
+    "vue2mapbox-gl"
   ],
 
-  chainWebpack: (config) => {
+  chainWebpack: config => {
     config.module
       .rule("markdown")
       .test(/\.md$/)
@@ -41,15 +42,15 @@ module.exports = {
       .use("yaml-loader")
       .loader("yaml-loader");
 
-    config.plugin("html").tap((args) => {
+    config.plugin("html").tap(args => {
       args[0].title = projectConfig.name;
       return args;
     });
 
-    config.plugin("define").tap((definitions) => {
+    config.plugin("define").tap(definitions => {
       definitions[0] = Object.assign(definitions[0], {
         LAYER_PAGES: JSON.stringify(layerPages),
-        LOCALES: JSON.stringify(locales),
+        LOCALES: JSON.stringify(locales)
       });
 
       return definitions;
@@ -57,14 +58,14 @@ module.exports = {
 
     config.plugin("env").use(require.resolve("webpack/lib/EnvironmentPlugin"), [
       {
-        CONFIG_DIR: path.join(__dirname, "/", configDir),
-      },
+        CONFIG_DIR: path.join(__dirname, "/", configDir)
+      }
     ]);
   },
 
   pluginOptions: {
     i18n: {
-      enableInSFC: true,
-    },
-  },
+      enableInSFC: true
+    }
+  }
 };
