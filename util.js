@@ -89,7 +89,6 @@ function installDependencies(destination) {
     spinner.color = 'green'
 
     const process = spawn("npm", ["install"], {
-      // stdio: "inherit",
       silent: true,
       cwd: path.join(destination, "app"),
     });
