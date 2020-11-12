@@ -86,7 +86,7 @@ function generatePackageJson(destination, options) {
 function installDependencies(destination) {
   return new Promise((resolve, reject) => {
     const spinner = ora("installing dependencies (this could take a while)").start();
-    spinner.color = 'blue'
+    spinner.color = 'green'
 
     const process = spawn("npm", ["install"], {
       // stdio: "inherit",
